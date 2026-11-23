@@ -1,0 +1,20 @@
+# OS & Editor files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+
+# Python / Playwright
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Scratch & Logs
+scratch*
+*.log
+verify_suite.py
+verify_playwright.py
+test_*.py

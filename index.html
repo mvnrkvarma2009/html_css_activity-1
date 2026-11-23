@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PARADOX ARENA | Expect the Unexpected | NRI University</title>
+  <meta name="description" content="PARADOX ARENA is the annual techno-cultural festival presented by NRI University, Andhra Pradesh. Technology, robotics, coding, music, dance, esports and competition. Expect the unexpected.">
+  <meta name="theme-color" content="#080808">
+
+  <!-- Inline SVG favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Cpolygon points='6,26 16,6 26,26' fill='%23C6FF00'/%3E%3C/svg%3E">
+
+  <!-- Fonts: Anton (display), Space Grotesk (body), JetBrains Mono (metadata) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- ======================================================================
+       UPGRADE CDNs & SCRIPTS
+       GSAP 3.12.5 & ScrollTrigger, Lenis 1.1 Smooth Scroll, Lucide Icons, Three.js
+       ====================================================================== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="js/scramble.js" defer></script>
+  <script src="js/digital-rain.js" defer></script>
+  <script src="js/flower-border.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Desktop-only reticle velocity cursor -->
+  <div id="custom-cursor" class="custom-cursor" aria-hidden="true">
+    <div class="custom-cursor__dot"></div>
+    <div class="custom-cursor__ring"></div>
+  </div>
+
+  <!-- ======================================================================
+       TERMINAL BOOT SEQUENCE PRELOADER
+       High-tech boot sequence, status bar, and dismiss curtain wipe
+       ====================================================================== -->
+  <div id="preloader" class="preloader" role="status" aria-live="polite" aria-label="Loading Paradox Arena">
+    <div class="preloader__curtain" aria-hidden="true"></div>
+    <div class="preloader__scanline" aria-hidden="true"></div>
+    <div class="preloader__container">
+      <div class="preloader__header">
+        <span class="preloader__indicator"></span>
+        <span class="preloader__title">PARADOX_SYSTEMS // BOOT_LOADER_v3.4</span>
+        <span class="preloader__code">NRI_NODE::N16.5-E80.6</span>
+      </div>
+      <div class="preloader__terminal" id="preloader-terminal">
+        <p class="preloader__line"><span class="preloader__prompt">&gt;</span> SYSTEM_KERNEL_INITIALIZE... <span class="hl-lime">OK</span></p>
+        <p class="preloader__line"><span class="preloader__prompt">&gt;</span> MEMORY_ALLOCATION: 1024MB NEURAL_CACHE... <span class="hl-lime">MOUNTED</span></p>
+        <p class="preloader__line"><span class="preloader__prompt">&gt;</span> ESTABLISHING HIGHWAY TRANSIT TELEMETRY... <span class="hl-lime">VERIFIED</span></p>
+        <p class="preloader__line"><span class="preloader__prompt">&gt;</span> ENGAGING HOLOGRAPHIC STAGE SUBSYSTEMS... <span class="hl-lime">SYNCHRONIZED</span></p>
+        <p class="preloader__line"><span class="preloader__prompt">&gt;</span> PARADOX ARENA CORE: EXPECT THE UNEXPECTED... <span class="hl-lime">READY</span></p>
+      </div>
+      <div class="preloader__progress-bar">
+        <div class="preloader__progress-fill" id="preloader-progress"></div>
+      </div>
+      <div class="preloader__footer">
+        <span class="preloader__status" id="preloader-status">INITIALIZING // 0%</span>
+        <span class="preloader__bypass">[CLICK OR PRESS ANY KEY TO SKIP]</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Keyboard users can jump straight past the navigation -->
+  <a class="skip-link" href="#hero">Skip to content</a>
+
+  <!-- ======================================================================
+       SITE HEADER + NAVIGATION
+       The hidden checkbox is the CSS-only "state" of the mobile menu.
+       It MUST come before the <nav> so the ~ sibling selector can reach it.
+       ====================================================================== -->
+  <header class="site-header">
+    <input type="checkbox" id="nav-toggle" class="nav__toggle" aria-label="Toggle mobile menu">
+
+    <nav class="nav" aria-label="Primary">
+      <a class="nav__logo" href="#hero" aria-label="PARADOX ARENA, back to top">
+        PARADOX <span>ARENA</span>
+      </a>
+
+      <!-- Ambient Audio Toggle Button -->
+      <button id="sound-toggle" class="sound-toggle" type="button" aria-label="Toggle ambient cyber audio" aria-pressed="false">
+        <i data-lucide="volume-x" class="sound-toggle__icon sound-toggle__icon--off" aria-hidden="true"></i>
+        <i data-lucide="volume-2" class="sound-toggle__icon sound-toggle__icon--on" aria-hidden="true"></i>
+        <span class="sound-toggle__label">AUDIO: OFF</span>
+      </button>
+
+      <label for="nav-toggle" class="nav__burger" aria-label="Toggle navigation menu">
+        <span class="sr-only">Menu</span>
+        <span class="nav__burger-bar" aria-hidden="true"></span>
+      </label>
+
+      <ul class="nav__links">
+        <li><a class="nav__link" href="#about"><span class="nav__num" aria-hidden="true">01</span>About</a></li>
+        <li><a class="nav__link" href="#events"><span class="nav__num" aria-hidden="true">02</span>Events</a></li>
+        <li><a class="nav__link" href="#schedule"><span class="nav__num" aria-hidden="true">03</span>Schedule</a></li>
+        <li><a class="nav__link" href="#experience"><span class="nav__num" aria-hidden="true">04</span>Experience</a></li>
+        <li><a class="nav__link" href="#featured"><span class="nav__num" aria-hidden="true">05</span>Arena</a></li>
+        <li><a class="nav__link" href="#performers"><span class="nav__num" aria-hidden="true">06</span>Performers</a></li>
+        <li><a class="nav__link" href="#venue"><span class="nav__num" aria-hidden="true">07</span>Venue</a></li>
+        <li><a class="nav__link nav__link--cta" href="#register"><span class="nav__num" aria-hidden="true">08</span>Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ======================================================================
+         HERO SECTION
+         Preserved original visual layers, typography, orbits, and animations
+         ====================================================================== -->
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+
+      <!-- Layer 1: cinematic photograph -->
+      <div class="hero__media">
+        <img
+          src="assets/images/hero_crowd.jpg"
+          alt="Atmospheric festival crowd raising hands under high-intensity concert stage lighting"
+          width="2000" height="1333"
+          fetchpriority="high">
+      </div>
+
+      <!-- Layers 2 and 3: pure CSS decoration (hidden from screen readers) -->
+      <div class="hero__overlay" aria-hidden="true"></div>
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="digital-rain-container" id="digital-rain-container" aria-hidden="true"></div>
+
+      <!-- Layer 4: orbital graphics and geometric shapes -->
+      <div class="hero__orbits" aria-hidden="true">
+        <div class="orbit orbit--1">
+          <div class="orbit orbit--2">
+            <div class="orbit orbit--3"></div>
+          </div>
+        </div>
+        <span class="hero__planet"></span>
+      </div>
+      <span class="hero__shape hero__shape--bar" aria-hidden="true"></span>
+      <span class="hero__shape hero__shape--tri" aria-hidden="true"></span>
+      <span class="hero__shape hero__shape--diamond" aria-hidden="true"></span>
+
+      <!-- Editorial metadata running up the right edge (desktop only) -->
+      <p class="hero__side" aria-hidden="true">N 16° / E 80° &mdash; Andhra Pradesh &mdash; Scroll</p>
+
+      <!-- Layer 5: the actual content -->
+      <div class="hero__content">
+
+        <p class="hero__presents">NRI University presents</p>
+
+        <div class="hero__titleblock">
+          <h1 class="hero__title" id="hero-title">
+            <span class="hero__line hero__line--1"><span class="hero__word">Paradox</span></span>
+            <span class="hero__line hero__line--2"><span class="hero__word hero__word--outline">Arena</span></span>
+          </h1>
+          <p class="hero__label">Annual<br>Techno-Cultural<br>Festival</p>
+        </div>
+
+        <!-- Live festival HUD countdown timer widget in Hero -->
+        <div id="festival-countdown" class="festival-countdown" aria-label="Festival Countdown Timer">
+          <div class="countdown-hud__header">
+            <span class="countdown-hud__badge">
+              <i data-lucide="clock" class="hud-icon" aria-hidden="true"></i> T-MINUS TO CONVERGENCE
+            </span>
+            <span class="countdown-hud__status">LIVE TELEMETRY // 30 DAYS OUT</span>
+          </div>
+          <div class="countdown-hud__grid">
+            <div class="countdown-unit">
+              <span class="countdown-unit__value" id="cd-days">30</span>
+              <span class="countdown-unit__label">DAYS</span>
+            </div>
+            <div class="countdown-sep" aria-hidden="true">:</div>
+            <div class="countdown-unit">
+              <span class="countdown-unit__value" id="cd-hours">00</span>
+              <span class="countdown-unit__label">HOURS</span>
+            </div>
+            <div class="countdown-sep" aria-hidden="true">:</div>
+            <div class="countdown-unit">
+              <span class="countdown-unit__value" id="cd-minutes">00</span>
+              <span class="countdown-unit__label">MINUTES</span>
+            </div>
+            <div class="countdown-sep" aria-hidden="true">:</div>
+            <div class="countdown-unit">
+              <span class="countdown-unit__value" id="cd-seconds">00</span>
+              <span class="countdown-unit__label">SECONDS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__footer">
+          <div class="hero__lead">
+            <p class="hero__tagline">Expect the <span class="hl">unexpected.</span></p>
+            <div class="hero__actions">
+              <a class="btn btn--primary" href="#events">Explore the Arena <i data-lucide="arrow-right" class="btn__arrow" aria-hidden="true"></i></a>
+              <a class="btn btn--ghost" href="#register">Enter Paradox <i data-lucide="arrow-right" class="btn__arrow" aria-hidden="true"></i></a>
+            </div>
+          </div>
+
+          <p class="hero__location">
+            <span>NRI University</span>
+            <span>Andhra Pradesh, India</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Looping ticker -->
+      <div class="hero__ticker">
+        <div class="ticker__track">
+          <ul class="ticker__group">
+            <li>Technology</li><li>Culture</li><li>Music</li><li>Competition</li><li>Innovation</li><li>Esports</li><li>Robotics</li>
+          </ul>
+          <ul class="ticker__group" aria-hidden="true">
+            <li>Technology</li><li>Culture</li><li>Music</li><li>Competition</li><li>Innovation</li><li>Esports</li><li>Robotics</li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================================
+         SECTION 01: ABOUT PARADOX ARENA
+         Techno-Cultural identity, pillars, narrative, and live statistics
+         ====================================================================== -->
+    <section class="section about" id="about" aria-labelledby="about-title">
+      <div class="container">
+        
+        <div class="section-head">
+          <div class="section-head__meta">
+            <span class="section-head__code">// 01 &mdash; IDENTITY</span>
+            <span class="section-head__label">ABOUT PARADOX</span>
+          </div>
+          <h2 class="section-head__title" id="about-title">WHERE CODE MEETS <span class="hl-lime">CREATIVE</span> VELOCITY</h2>
+        </div>
+
+        <div class="about__grid">
+          
+          <div class="about__narrative">
+            <p class="about__lead">
+              <strong>PARADOX ARENA</strong> is the flagship annual techno-cultural festival presented by <strong>NRI University</strong> in Andhra Pradesh. It is a collision ground where analytical precision and untamed artistic expression coalesce.
+            </p>
+            <p class="about__text">
+              Over two electric days, the NRI University campus transforms into an autonomous proving ground for over 10,000 innovators, engineers, performers, gamers, and visionaries from across the nation. Whether pushing autonomous robotics to their kinetic limits or dominating the main stage under blinding amphitheatre lights, PARADOX ARENA challenges you to transcend conventional boundaries.
+            </p>
+            <div class="about__quote">
+              <blockquote>"An arena engineered for the dreamers who calculate by day and electrify the night."</blockquote>
+              <cite>&mdash; NRI University Festival Council</cite>
+            </div>
+          </div>
+
+          <div class="about__pillars">
+            <div class="pillar-card">
+              <div class="pillar-card__header">
+                <span class="pillar-card__idx">01</span>
+                <span class="pillar-card__tag">TECHNOLOGY &amp; CODE</span>
+              </div>
+              <h3 class="pillar-card__title">HARD SCIENCE &amp; SYNTHETIC INTELLIGENCE</h3>
+              <p class="pillar-card__desc">
+                From 48-hour endurance hackathons and edge-compute algorithms to high-torque combat robotics and quantum workshops, we forge a rigorous arena for technical supremacy.
+              </p>
+              <ul class="pillar-card__list">
+                <li>&bull; NeuroHack AI Sprints</li>
+                <li>&bull; Kinetic Robot Warfare</li>
+                <li>&bull; Algorithmic Speed Runs</li>
+              </ul>
+            </div>
+
+            <div class="pillar-card pillar-card--violet">
+              <div class="pillar-card__header">
+                <span class="pillar-card__idx">02</span>
+                <span class="pillar-card__tag">CULTURE &amp; MUSIC</span>
+              </div>
+              <h3 class="pillar-card__title">SONIC RESONANCE &amp; HUMAN MOVEMENT</h3>
+              <p class="pillar-card__desc">
+                Explosive live rock bands, progressive classical fusion, mega-crew street dance battles, theatrical dramatics, and visual arts ignite the night across campus arenas.
+              </p>
+              <ul class="pillar-card__list">
+                <li>&bull; Battle of the Bands</li>
+                <li>&bull; Step Paradox Choreo Clash</li>
+                <li>&bull; Headline Sunset Concerts</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Festival Metrics / Stats Counter Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-card__number">48<span class="stat-card__unit">H</span></span>
+            <span class="stat-card__label">Continuous Festival Pulse</span>
+            <span class="stat-card__code">LOC: CAMPUS-WIDE</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__number">10K<span class="stat-card__unit">+</span></span>
+            <span class="stat-card__label">Student Innovators &amp; Artists</span>
+            <span class="stat-card__code">ATTENDANCE REACH</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__number">&#8377;5L<span class="stat-card__unit">+</span></span>
+            <span class="stat-card__label">Prize Vault &amp; Tech Grants</span>
+            <span class="stat-card__code">COMPETITION REWARDS</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__number">35<span class="stat-card__unit">+</span></span>
+            <span class="stat-card__label">Arenas, Challenges &amp; Labs</span>
+            <span class="stat-card__code">SANCTIONED EVENTS</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECTION 02: EVENTS / FESTIVAL CATEGORIES
+         Event discovery, distinct categories, visual treatments, and prizes
+         ====================================================================== -->
+    <section class="section events" id="events" aria-labelledby="events-title">
+      <div class="container">
+
+        <div class="section-head">
+          <div class="section-head__meta">
+            <span class="section-head__code">// 02 &mdash; BATTLEGROUNDS</span>
+            <span class="section-head__label">FESTIVAL CATEGORIES</span>
+          </div>
+          <div class="section-head__flex">
+            <h2 class="section-head__title" id="events-title">CHOOSE YOUR <span class="hl-lime">ARENA</span></h2>
+            <p class="section-head__subtitle">Explore premier collegiate competitions spanning artificial intelligence, mechanical robotics, esports, and cultural spectacles.</p>
+          </div>
+        </div>
+
+        <!-- Category filter tabs in Events section -->
+        <div id="event-filters" class="event-filters" role="tablist" aria-label="Event category filters">
+          <button type="button" class="filter-tab filter-tab--active" role="tab" aria-selected="true" data-filter="all">
+            <i data-lucide="layers" class="filter-tab__icon" aria-hidden="true"></i>
+            <span>All Battlegrounds</span>
+          </button>
+          <button type="button" class="filter-tab" role="tab" aria-selected="false" data-filter="ai-code">
+            <i data-lucide="terminal" class="filter-tab__icon" aria-hidden="true"></i>
+            <span>AI &amp; Code</span>
+          </button>
+          <button type="button" class="filter-tab" role="tab" aria-selected="false" data-filter="robotics">
+            <i data-lucide="cpu" class="filter-tab__icon" aria-hidden="true"></i>
+            <span>Robotics</span>
+          </button>
+          <button type="button" class="filter-tab" role="tab" aria-selected="false" data-filter="esports">
+            <i data-lucide="gamepad-2" class="filter-tab__icon" aria-hidden="true"></i>
+            <span>Esports</span>
+          </button>
+          <button type="button" class="filter-tab" role="tab" aria-selected="false" data-filter="culture">
+            <i data-lucide="music" class="filter-tab__icon" aria-hidden="true"></i>
+            <span>Music &amp; Culture</span>
+          </button>
+          <button type="button" class="filter-tab" role="tab" aria-selected="false" data-filter="workshops">
+            <i data-lucide="sparkles" class="filter-tab__icon" aria-hidden="true"></i>
+            <span>Workshops</span>
+          </button>
+        </div>
+
+        <div class="events__grid">
+
+          <!-- Event 01: AI Hackathon -->
+          <article class="event-card" data-category="ai-code">
+            <div class="event-card__media">
+              <img src="assets/images/tech_hackathon.jpg" alt="Developers collaborating on code during an intense night hackathon" loading="lazy">
+              <span class="event-card__badge">AI &amp; INNOVATION</span>
+            </div>
+            <div class="event-card__body">
+              <div class="event-card__meta">
+                <span class="event-card__loc">HACKER HANGAR</span>
+                <span class="event-card__prize">POOL: &#8377;1,50,000</span>
+              </div>
+              <h3 class="event-card__title">NEUROHACK 48H</h3>
+              <p class="event-card__desc">
+                An endurance sprint where developers construct real-world autonomous agents, edge-AI models, and decentralized solutions. Non-stop mentoring, high-speed fiber, and cloud compute credits provided.
+              </p>
+              <div class="event-card__footer">
+                <span class="event-card__format">Team of 2-4 &bull; 48 Hours</span>
+                <a class="btn-text" href="#register">Register Team <i data-lucide="arrow-right" class="icon-inline" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Event 02: Robotics Combat -->
+          <article class="event-card" data-category="robotics">
+            <div class="event-card__media">
+              <img src="assets/images/tech_robotics.jpg" alt="Autonomous mechanical robot with illuminated sensory apparatus" loading="lazy">
+              <span class="event-card__badge event-card__badge--lime">ROBOTICS</span>
+            </div>
+            <div class="event-card__body">
+              <div class="event-card__meta">
+                <span class="event-card__loc">THE KINETIC PIT</span>
+                <span class="event-card__prize">POOL: &#8377;1,00,000</span>
+              </div>
+              <h3 class="event-card__title">ROBOCLASH: TITAN ARENA</h3>
+              <p class="event-card__desc">
+                Armored combat bots clash inside a steel-reinforced cage complete with spinning drum hazards, pneumatic flippers, and autonomous obstacle navigation rounds.
+              </p>
+              <div class="event-card__footer">
+                <span class="event-card__format">15kg &amp; 30kg Weight Classes</span>
+                <a class="btn-text" href="#register">Register Bot <i data-lucide="arrow-right" class="icon-inline" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Event 03: Competitive Coding -->
+          <article class="event-card" data-category="ai-code">
+            <div class="event-card__media">
+              <img src="assets/images/workshop_ai.jpg" alt="Programmer analyzing real-time algorithmic syntax across multiple displays" loading="lazy">
+              <span class="event-card__badge">CODING CHALLENGES</span>
+            </div>
+            <div class="event-card__body">
+              <div class="event-card__meta">
+                <span class="event-card__loc">COMPUTE LAB ALPHA</span>
+                <span class="event-card__prize">POOL: &#8377;50,000</span>
+              </div>
+              <h3 class="event-card__title">ALGORITHMIX: SPEED RUN</h3>
+              <p class="event-card__desc">
+                High-pressure competitive programming showdown evaluating algorithmic complexity, dynamic programming, graph traversal, and edge-case execution under strict countdowns.
+              </p>
+              <div class="event-card__footer">
+                <span class="event-card__format">Solo Competitor &bull; 3 Rounds</span>
+                <a class="btn-text" href="#register">Enter Sprint <i data-lucide="arrow-right" class="icon-inline" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Event 04: Esports Championship -->
+          <article class="event-card" data-category="esports">
+            <div class="event-card__media">
+              <img src="assets/images/gaming_esports.jpg" alt="Gamer seated in front of illuminated RGB esports monitor and setup" loading="lazy">
+              <span class="event-card__badge event-card__badge--violet">GAMING &amp; ESPORTS</span>
+            </div>
+            <div class="event-card__body">
+              <div class="event-card__meta">
+                <span class="event-card__loc">ESPORTS COLISEUM</span>
+                <span class="event-card__prize">POOL: &#8377;80,000</span>
+              </div>
+              <h3 class="event-card__title">APEX VELOCITY ESPORTS</h3>
+              <p class="event-card__desc">
+                The ultimate collegiate esports coliseum featuring Valorant 5v5 tactical brackets, BGMI squad battles, and EA FC 24 knockout brackets with live arena casting.
+              </p>
+              <div class="event-card__footer">
+                <span class="event-card__format">Squads &amp; Solo &bull; LAN Final</span>
+                <a class="btn-text" href="#register">Join Tournament <i data-lucide="arrow-right" class="icon-inline" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Event 05: Battle of the Bands -->
+          <article class="event-card" data-category="culture">
+            <div class="event-card__media">
+              <img src="assets/images/culture_music.jpg" alt="Live rock musician performing guitar solo under intense arena beams" loading="lazy">
+              <span class="event-card__badge event-card__badge--violet">MUSIC &amp; LIVE BANDS</span>
+            </div>
+            <div class="event-card__body">
+              <div class="event-card__meta">
+                <span class="event-card__loc">ARENA PRIME (AMPHITHEATRE)</span>
+                <span class="event-card__prize">POOL: &#8377;60,000</span>
+              </div>
+              <h3 class="event-card__title">RESONANCE: BATTLE OF BANDS</h3>
+              <p class="event-card__desc">
+                College rock, alternative, and regional fusion bands bring original compositions and acoustic fury to the open-air amphitheatre stage powered by 100kW audio.
+              </p>
+              <div class="event-card__footer">
+                <span class="event-card__format">Band (3-8 Members)</span>
+                <a class="btn-text" href="#register">Enlist Band <i data-lucide="arrow-right" class="icon-inline" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Event 06: Dance Championship -->
+          <article class="event-card" data-category="culture">
+            <div class="event-card__media">
+              <img src="assets/images/culture_dance.jpg" alt="Dancer caught mid-air performing dynamic choreography on stage" loading="lazy">
+              <span class="event-card__badge event-card__badge--lime">DANCE &amp; CULTURE</span>
+            </div>
+            <div class="event-card__body">
+              <div class="event-card__meta">
+                <span class="event-card__loc">MAIN AUDITORIUM</span>
+                <span class="event-card__prize">POOL: &#8377;50,000</span>
+              </div>
+              <h3 class="event-card__title">STEP PARADOX: CHOREO CLASH</h3>
+              <p class="event-card__desc">
+                Inter-college mega-crew and solo choreography battles uniting Western hip-hop, classical contemporary fusion, and dynamic theatrical formations.
+              </p>
+              <div class="event-card__footer">
+                <span class="event-card__format">Solo &bull; Duo &bull; Mega-Crew</span>
+                <a class="btn-text" href="#register">Enter Stage <i data-lucide="arrow-right" class="icon-inline" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Event 07: Technical Workshops -->
+          <article class="event-card" data-category="workshops">
+            <div class="event-card__media">
+              <img src="assets/images/workshop_ai.jpg" alt="Researchers conducting live Edge-AI and Quantum algorithms workshop" loading="lazy">
+              <span class="event-card__badge event-card__badge--lime">WORKSHOPS &amp; LABS</span>
+            </div>
+            <div class="event-card__body">
+              <div class="event-card__meta">
+                <span class="event-card__loc">SEMINAR COMPLEX</span>
+                <span class="event-card__prize">CERTS &amp; CREDITS</span>
+              </div>
+              <h3 class="event-card__title">EDGE-AI &amp; QUANTUM LABS</h3>
+              <p class="event-card__desc">
+                Hands-on masterclass in local neural inference, embedded quantization, and quantum computing frameworks guided by distinguished researchers.
+              </p>
+              <div class="event-card__footer">
+                <span class="event-card__format">Hands-on Intensive &bull; 3 Sessions</span>
+                <a class="btn-text" href="#register">Enlist Workshop <i data-lucide="arrow-right" class="icon-inline" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECTION 03: FESTIVAL SCHEDULE
+         Provisional timeline, day divisions, time slots, locations, and stages
+         ====================================================================== -->
+    <section class="section schedule" id="schedule" aria-labelledby="schedule-title">
+      <div class="container">
+
+        <div class="section-head">
+          <div class="section-head__meta">
+            <span class="section-head__code">// 03 &mdash; TEMPORAL MATRIX</span>
+            <span class="section-head__label">FESTIVAL SCHEDULE</span>
+          </div>
+          <div class="section-head__flex">
+            <h2 class="section-head__title" id="schedule-title">TWO DAYS OF <span class="hl-lime">RELENTLESS</span> MOMENTUM</h2>
+            <div class="schedule-notice">
+              <span class="schedule-notice__dot" aria-hidden="true"></span>
+              <span>Provisional Schedule &bull; Subject to Stage Coordination</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="schedule__container">
+
+          <!-- Day 01 Division -->
+          <div class="schedule-day">
+            <div class="schedule-day__header">
+              <div class="schedule-day__badge">
+                <span class="schedule-day__number">DAY 01</span>
+                <span class="schedule-day__code">TRACK-A // CONVERGENCE</span>
+              </div>
+              <h3 class="schedule-day__title">THE CONVERGENCE</h3>
+              <p class="schedule-day__tagline">Inaugural Keynotes &bull; Hackathon Kickoff &bull; Battle of the Bands</p>
+            </div>
+
+            <ol class="timeline">
+              <li class="timeline__item">
+                <div class="timeline__time">09:00 &mdash; 10:30</div>
+                <div class="timeline__content">
+                  <div class="timeline__meta">
+                    <span class="tag tag--venue">MAIN AUDITORIUM</span>
+                    <span class="tag tag--type">CEREMONIAL</span>
+                  </div>
+                  <h4 class="timeline__title">Grand Festival Inauguration &amp; Keynote</h4>
+                  <p class="timeline__desc">Opening ceremony by NRI University leadership, lighting of the lamp, introduction of university dignitaries, and keynote on Next-Gen Autonomous Systems.</p>
+                </div>
+              </li>
+
+              <li class="timeline__item">
+                <div class="timeline__time">11:00 &mdash; 13:00</div>
+                <div class="timeline__content">
+                  <div class="timeline__meta">
+                    <span class="tag tag--venue">HACKER HANGAR</span>
+                    <span class="tag tag--type">TECH</span>
+                  </div>
+                  <h4 class="timeline__title">NeuroHack 48H: Challenge Release &amp; Sprint Kickoff</h4>
+                  <p class="timeline__desc">Release of industry-sponsored problem statements, API distribution, compute environment provisioning, and kickoff of the 48-hour continuous hackathon.</p>
+                </div>
+              </li>
+
+              <li class="timeline__item">
+                <div class="timeline__time">11:30 &mdash; 15:30</div>
+                <div class="timeline__content">
+                  <div class="timeline__meta">
+                    <span class="tag tag--venue">COMPUTE LAB ALPHA</span>
+                    <span class="tag tag--type">COMPETITION</span>
+                  </div>
+                  <h4 class="timeline__title">Algorithmix: Competitive Coding Prelims</h4>
+                  <p class="timeline__desc">Round 1 and 2 algorithmic elimination rounds testing data structures, dynamic programming, and numerical problem solving under strict clock timers.</p>
+                </div>
+              </li>
+
+              <li class="timeline__item">
+                <div class="timeline__time">14:00 &mdash; 18:00</div>
+                <div class="timeline__content">
+                  <div class="timeline__meta">
+                    <span class="tag tag--venue">THE KINETIC PIT</span>
+                    <span class="tag tag--type">ROBOTICS</span>
+                  </div>
+                  <h4 class="timeline__title">RoboClash: Weight Class Qualifiers &amp; Pit Tests</h4>
+                  <p class="timeline__desc">Pre-fight safety inspections, weapon RPM validation, arena hazard testing, and preliminary knockout rounds in the 15kg combat division.</p>
+                </div>
+              </li>
+
+              <li class="timeline__item">
+                <div class="timeline__time">16:00 &mdash; 18:30</div>
+                <div class="timeline__content">
+                  <div class="timeline__meta">
+                    <span class="tag tag--venue">SEMINAR COMPLEX</span>
+                    <span class="tag tag--type">WORKSHOP</span>
+                  </div>
+                  <h4 class="timeline__title">Edge-AI &amp; Embedded Intelligence Masterclass</h4>
+                  <p class="timeline__desc">Hands-on technical workshop exploring local LLM quantization, ONNX runtimes, and neuromorphic edge hardware architectures led by industry architects.</p>
+                </div>
+              </li>
+
+              <li class="timeline__item timeline__item--highlight">
+                <div class="timeline__time">19:00 &mdash; 22:30</div>
+                <div class="timeline__content">
+                  <div class="timeline__meta">
+                    <span class="tag tag--venue">ARENA PRIME (AMPHITHEATRE)</span>
+                    <span class="tag tag--type tag--highlight">HEADLINE EVENT</span>
+                  </div>
+                  <h4 class="timeline__title">Resonance: Battle of the Bands &amp; Sunset Acoustic Show</h4>
+                  <p class="timeline__desc">Top 8 collegiate bands clash under amphitheatre lights, followed by special guest headline set from progressive Carnatic-rock band Agni Chronicles.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <!-- Day 02 Division -->
+          <div class="schedule-day">
+            <div class="schedule-day__header">
+              <div class="schedule-day__badge">
+                <span class="schedule-day__number">DAY 02</span>
+                <span class="schedule-day__code">TRACK-B // TRANSCENDENCE</span>
+              </div>
+              <h3 class="schedule-day__title">THE TRANSCENDENCE</h3>
+              <p class="schedule-day__tagline">RoboClash Finals &bull; Esports Championship &bull; Grand EDM Night</p>
+            </div>
+
+            <ol class="timeline">
+              <li class="timeline__item">
+                <div class="timeline__time">09:30 &mdash; 13:00</div>
+                <div class="timeline__content">
+                  <div class="timeline__meta">
+                    <span class="tag tag--venue">ESPORTS COLISEUM</span>
+                    <span class="tag tag--type">ESPORTS</span>
+                  </div>
+                  <h4 class="timeline__title">Apex Velocity: Semi-Finals &amp; Grand Finals</h4>
+                  <p class="timeline__desc">Championship brackets for Valorant tactical matches and BGMI stadium lobbies broadcast on giant stage projection displays with guest commentators.</p>
+                </div>
+              </li>
+
+              <li class="timeline__item">
+                <div class="timeline__time">10:00 &mdash; 14:00</div>
+                <div class="timeline__content">
+                  <div class="timeline__meta">
+                    <span class="tag tag--venue">MAIN AUDITORIUM</span>
+                    <span class="tag tag--type">CULTURE</span>
+                  </div>
+                  <h4 class="timeline__title">Step Paradox: National Mega-Crew Dance Finals</h4>
+                  <p class="timeline__desc">Synchronized collegiate dance crews compete across hip-hop, classical-fusion, and cinematic choreography formats evaluated by national judging panel.</p>
+                </div>
+              </li>
+
+              <li class="timeline__item">
+                <div class="timeline__time">13:30 &mdash; 16:30</div>
+                <div class="timeline__content">
+                  <div class="timeline__meta">
+                    <span class="tag tag--venue">THE KINETIC PIT</span>
+                    <span class="tag tag--type">ROBOTICS</span>
+                  </div>
+                  <h4 class="timeline__title">RoboClash: 30kg Heavyweight Championship Deathmatch</h4>
+                  <p class="timeline__desc">The ultimate destruction derby: surviving bots enter the arena with all floor traps, spinning saw blades, and hazard zones activated.</p>
+                </div>
+              </li>
+
+              <li class="timeline__item">
+                <div class="timeline__time">15:00 &mdash; 17:00</div>
+                <div class="timeline__content">
+                  <div class="timeline__meta">
+                    <span class="tag tag--venue">HACKER HANGAR</span>
+                    <span class="tag tag--type">TECH</span>
+                  </div>
+                  <h4 class="timeline__title">NeuroHack 48H: Final Pitch Demos &amp; Code Review</h4>
+                  <p class="timeline__desc">Top 10 hackathon finalist teams pitch live working prototypes before an esteemed jury of startup founders, tech leads, and university researchers.</p>
+                </div>
+              </li>
+
+              <li class="timeline__item">
+                <div class="timeline__time">17:30 &mdash; 19:00</div>
+                <div class="timeline__content">
+                  <div class="timeline__meta">
+                    <span class="tag tag--venue">ARENA PRIME</span>
+                    <span class="tag tag--type">CEREMONIAL</span>
+                  </div>
+                  <h4 class="timeline__title">Grand Valedictory &amp; Innovation Grant Awards</h4>
+                  <p class="timeline__desc">Felicitation of winners, presentation of the &#8377;5,00,000+ prize vault, university trophies, and incubation grants by NRI University dignitaries.</p>
+                </div>
+              </li>
+
+              <li class="timeline__item timeline__item--highlight">
+                <div class="timeline__time">19:30 &mdash; 23:00</div>
+                <div class="timeline__content">
+                  <div class="timeline__meta">
+                    <span class="tag tag--venue">ARENA PRIME (OPEN AIR THEATRE)</span>
+                    <span class="tag tag--type tag--highlight">GRAND FINALE</span>
+                  </div>
+                  <h4 class="timeline__title">Synthesis Nova &amp; Cyber-Sonic EDM Finale</h4>
+                  <p class="timeline__desc">The crowning celebration of PARADOX ARENA featuring synchronized lasers, 3D visual synthesizers, and massive electronic synthwave headliner sets.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECTION 04: THE EXPERIENCE
+         Atmosphere, festival sensory pillars, immersion, and community
+         ====================================================================== -->
+    <section class="section experience" id="experience" aria-labelledby="experience-title">
+      <div class="container">
+
+        <div class="section-head">
+          <div class="section-head__meta">
+            <span class="section-head__code">// 04 &mdash; SENSORY SPECTRUM</span>
+            <span class="section-head__label">THE EXPERIENCE</span>
+          </div>
+          <h2 class="section-head__title" id="experience-title">AN IMMERSIVE <span class="hl-lime">CAMPUS</span> METROPOLIS</h2>
+        </div>
+
+        <div class="exp-grid">
+
+          <div class="exp-card exp-card--wide">
+            <div class="exp-card__num">01</div>
+            <div class="exp-card__content">
+              <span class="exp-card__tag">VISUAL IMMERSION</span>
+              <h3 class="exp-card__title">NEON CONCOURSE &amp; LIGHT INSTALLATIONS</h3>
+              <p class="exp-card__desc">
+                NRI University’s central spine transforms into a luminous futuristic promenade. Kinetic light sculptures, reactive projection-mapped architecture, and student-built interactive art installations react to movement and ambient sound in real time.
+              </p>
+            </div>
+            <div class="exp-card__corner" aria-hidden="true"></div>
+          </div>
+
+          <div class="exp-card">
+            <div class="exp-card__num">02</div>
+            <div class="exp-card__content">
+              <span class="exp-card__tag">ACOUSTIC POWER</span>
+              <h3 class="exp-card__title">100kW ARENA SOUNDSTAGE</h3>
+              <p class="exp-card__desc">
+                Custom line-array concert audio engineered specifically for the natural acoustic bowl of Arena Prime, synchronized with multi-axis lasers and intelligent atmospheric haze.
+              </p>
+            </div>
+            <div class="exp-card__corner" aria-hidden="true"></div>
+          </div>
+
+          <div class="exp-card">
+            <div class="exp-card__num">03</div>
+            <div class="exp-card__content">
+              <span class="exp-card__tag">ESPORTS ARENA</span>
+              <h3 class="exp-card__title">BROADCAST-TIER ESPORTS RIGS</h3>
+              <p class="exp-card__desc">
+                High-refresh rate tournament displays, low-latency gigabit networking, dedicated caster desks, and spectator seating deliver pure competitive gaming energy.
+              </p>
+            </div>
+            <div class="exp-card__corner" aria-hidden="true"></div>
+          </div>
+
+          <div class="exp-card exp-card--wide">
+            <div class="exp-card__num">04</div>
+            <div class="exp-card__content">
+              <span class="exp-card__tag">MAKER CULTURE</span>
+              <h3 class="exp-card__title">MAKER DISTRICT &amp; POP-UP CULINARY PROMENADE</h3>
+              <p class="exp-card__desc">
+                Step into a sprawling maker zone featuring rapid 3D printing pods, drone simulator cages, open-source hardware displays, and an extensive open-air food festival serving regional Andhra specialties and international street food.
+              </p>
+            </div>
+            <div class="exp-card__corner" aria-hidden="true"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECTION 05: FEATURED ARENA / HIGHLIGHTS
+         Zonal blueprints, key locations on campus, high-impact architecture
+         ====================================================================== -->
+    <section class="section featured" id="featured" aria-labelledby="featured-title">
+      <div class="container">
+
+        <div class="section-head">
+          <div class="section-head__meta">
+            <span class="section-head__code">// 05 &mdash; ZONAL BLUEPRINTS</span>
+            <span class="section-head__label">FEATURED ARENA</span>
+          </div>
+          <div class="section-head__flex">
+            <h2 class="section-head__title" id="featured-title">PHYSICAL CORRIDORS OF <span class="hl-lime">PARADOX</span></h2>
+            <p class="section-head__subtitle">Four specialized festival zones custom-equipped across the NRI University campus to facilitate high-stakes technical innovation and grand cultural spectacles.</p>
+          </div>
+        </div>
+
+        <div class="zones-grid">
+
+          <div class="zone-card">
+            <div class="zone-card__header">
+              <span class="zone-card__code">ZONE // 01</span>
+              <span class="zone-card__cap">CAPACITY: 6,000+</span>
+            </div>
+            <h3 class="zone-card__title">ARENA PRIME</h3>
+            <p class="zone-card__subtitle">Open Air Amphitheatre</p>
+            <p class="zone-card__desc">
+              The beating heart of the festival. An open-air architectural amphitheatre engineered for maximum acoustics, staging the inaugural ceremony, Battle of the Bands, and the massive EDM grand finale.
+            </p>
+            <div class="zone-card__specs">
+              <div class="spec-item">
+                <span class="spec-label">DIMENSIONS</span>
+                <span class="spec-value">60ft &times; 45ft Stage</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">RIGGING</span>
+                <span class="spec-value">100kW Line Array</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">ACCESS</span>
+                <span class="spec-value">North Quad Gate</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="zone-card">
+            <div class="zone-card__header">
+              <span class="zone-card__code">ZONE // 02</span>
+              <span class="zone-card__cap">CAPACITY: 2,500+</span>
+            </div>
+            <h3 class="zone-card__title">THE KINETIC PIT</h3>
+            <p class="zone-card__subtitle">Armored Robotics Combat Dome</p>
+            <p class="zone-card__desc">
+              Surrounded by high-impact polycarbonate ballistic shielding, this custom combat arena tests mechanical durability with integrated motorized pit hazards, pneumatic floor flippers, and saw traps.
+            </p>
+            <div class="zone-card__specs">
+              <div class="spec-item">
+                <span class="spec-label">SECURITY</span>
+                <span class="spec-value">12mm Polycarbonate</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">POWER</span>
+                <span class="spec-value">3-Phase Industrial</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">ACCESS</span>
+                <span class="spec-value">Mechanical Quad</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="zone-card">
+            <div class="zone-card__header">
+              <span class="zone-card__code">ZONE // 03</span>
+              <span class="zone-card__cap">CAPACITY: 1,500+</span>
+            </div>
+            <h3 class="zone-card__title">THE NEXUS AUDITORIUM</h3>
+            <p class="zone-card__subtitle">Acoustic Performance Theatre</p>
+            <p class="zone-card__desc">
+              A state-of-the-art auditorium featuring tiered seating, precision theatre lighting, and high-definition laser projectors. Host venue for Step Paradox choreography clash and innovation keynotes.
+            </p>
+            <div class="zone-card__specs">
+              <div class="spec-item">
+                <span class="spec-label">SEATING</span>
+                <span class="spec-value">Tiered Ergonomic</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">PROJECTION</span>
+                <span class="spec-value">Dual 4K Laser</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">ACCESS</span>
+                <span class="spec-value">Central Administrative Block</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="zone-card">
+            <div class="zone-card__header">
+              <span class="zone-card__code">ZONE // 04</span>
+              <span class="zone-card__cap">CAPACITY: 800 CODERS</span>
+            </div>
+            <h3 class="zone-card__title">HACKER HANGAR</h3>
+            <p class="zone-card__subtitle">Continuous Innovation Lab</p>
+            <p class="zone-card__desc">
+              The continuous nerve center for NeuroHack 48H. Equipped with dual-redundant multi-gigabit fiber connections, uninterrupted power distribution, rest pods, and 24-hour hydration stations.
+            </p>
+            <div class="zone-card__specs">
+              <div class="spec-item">
+                <span class="spec-label">NETWORK</span>
+                <span class="spec-value">10 Gbps Fiber Mesh</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">UPTIME</span>
+                <span class="spec-value">48 Hours Continuous</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">ACCESS</span>
+                <span class="spec-value">Computer Science Complex</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECTION 06: PERFORMERS (Mandatory assignment requirement)
+         Artists, headline performers, categories, imagery, and profiles
+         ====================================================================== -->
+    <section class="section performers" id="performers" aria-labelledby="performers-title">
+      <div class="container">
+
+        <div class="section-head">
+          <div class="section-head__meta">
+            <span class="section-head__code">// 06 &mdash; SONIC HEADLINERS</span>
+            <span class="section-head__label">GUEST PERFORMERS</span>
+          </div>
+          <div class="section-head__flex">
+            <h2 class="section-head__title" id="performers-title">ELECTRIFIED <span class="hl-lime">STAGE</span> VIRTUOSOS</h2>
+            <p class="section-head__subtitle">Meet the visionary artists, headline electronic acts, rock collectives, and dance crews set to command the stages at PARADOX ARENA.</p>
+          </div>
+        </div>
+
+        <!-- Flower Border Organic Cyber Graphic Accent -->
+        <div class="flower-border-container" id="flower-border-container" aria-hidden="true"></div>
+
+        <div class="performers__grid">
+
+          <!-- Performer 01 -->
+          <article class="performer-card">
+            <div class="performer-card__media">
+              <img src="assets/images/performer_synth.jpg" alt="Synthesis Nova electronic synthwave artist performing behind illuminated synthesizers" loading="lazy">
+              <div class="performer-card__overlay"></div>
+              <span class="performer-card__tag">HEADLINE ACT // NIGHT 02</span>
+            </div>
+            <div class="performer-card__info">
+              <span class="performer-card__genre">ELECTRONIC / SYNTHWAVE</span>
+              <h3 class="performer-card__name">SYNTHESIS NOVA</h3>
+              <p class="performer-card__desc">
+                Pioneering electronic duo fusing modular analog synths, cyberpunk aesthetics, and infectious sub-bass drops. Their audiovisual live performance closes PARADOX ARENA with blinding laser coordination.
+              </p>
+              <div class="performer-card__footer">
+                <span class="performer-card__slot">ARENA PRIME &bull; 20:30</span>
+                <span class="performer-card__status">CONFIRMED HEADLINER</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Performer 02 -->
+          <article class="performer-card">
+            <div class="performer-card__media">
+              <img src="assets/images/performer_rock.jpg" alt="Agni Chronicles lead guitarist and vocalist during high-energy rock performance" loading="lazy">
+              <div class="performer-card__overlay"></div>
+              <span class="performer-card__tag">HEADLINE ACT // NIGHT 01</span>
+            </div>
+            <div class="performer-card__info">
+              <span class="performer-card__genre">PROGRESSIVE CARNATIC ROCK</span>
+              <h3 class="performer-card__name">AGNI CHRONICLES</h3>
+              <p class="performer-card__desc">
+                A powerhouse seven-member collective uniting complex Carnatic classical ragas with devastating progressive rock riffs, soaring electric violin, and thunderous percussion.
+              </p>
+              <div class="performer-card__footer">
+                <span class="performer-card__slot">ARENA PRIME &bull; 21:00</span>
+                <span class="performer-card__status">CONFIRMED HEADLINER</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Performer 03 -->
+          <article class="performer-card">
+            <div class="performer-card__media">
+              <img src="assets/images/performer_dance.jpg" alt="Urban Pulse Crew performing synchronized street dance breakdance sequence" loading="lazy">
+              <div class="performer-card__overlay"></div>
+              <span class="performer-card__tag">CULTURAL SHOWCASE</span>
+            </div>
+            <div class="performer-card__info">
+              <span class="performer-card__genre">STREET DANCE &amp; B-BOYING</span>
+              <h3 class="performer-card__name">URBAN PULSE CREW</h3>
+              <p class="performer-card__desc">
+                National championship street dance collective famed for jaw-dropping power moves, synchronized popping, and dramatic storytelling that redefines contemporary urban dance.
+              </p>
+              <div class="performer-card__footer">
+                <span class="performer-card__slot">MAIN AUDITORIUM &bull; 18:00</span>
+                <span class="performer-card__status">SPECIAL GUESTS</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Performer 04 -->
+          <article class="performer-card">
+            <div class="performer-card__media">
+              <img src="assets/images/performer_fusion.jpg" alt="Aura Strings Ensemble violinists performing classical-modern instrumental symphony" loading="lazy">
+              <div class="performer-card__overlay"></div>
+              <span class="performer-card__tag">INAUGURAL SYMPHONY</span>
+            </div>
+            <div class="performer-card__info">
+              <span class="performer-card__genre">CINEMATIC ORCHESTRAL FUSION</span>
+              <h3 class="performer-card__name">AURA STRINGS</h3>
+              <p class="performer-card__desc">
+                An acoustic and electric instrumental ensemble blending orchestral violins with cinematic sci-fi textures, setting the grand auditory tone for the opening festival ceremony.
+              </p>
+              <div class="performer-card__footer">
+                <span class="performer-card__slot">MAIN AUDITORIUM &bull; 09:45</span>
+                <span class="performer-card__status">OPENING ENSEMBLE</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Announcement banner -->
+        <div class="performers-roster-banner">
+          <div class="roster-banner__text">
+            <strong>PHASE 2 ROSTER DROPS SOON:</strong> Additional regional acoustic bands, stand-up comedy acts, and celebrity guest panelists will be unveiled through official NRI University channels.
+          </div>
+          <span class="roster-banner__code">// ANNOUNCEMENT PIPELINE ACTIVE</span>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECTION 07: VENUE / LOCATION (Mandatory assignment requirement)
+         NRI University, Andhra Pradesh, India, campus vectors and transit
+         ====================================================================== -->
+    <section class="section venue" id="venue" aria-labelledby="venue-title">
+      <div class="container">
+
+        <div class="section-head">
+          <div class="section-head__meta">
+            <span class="section-head__code">// 07 &mdash; PHYSICAL VECTOR</span>
+            <span class="section-head__label">VENUE &amp; LOCATION</span>
+          </div>
+          <div class="section-head__flex">
+            <h2 class="section-head__title" id="venue-title">HOSTED AT <span class="hl-lime">NRI UNIVERSITY</span></h2>
+            <p class="section-head__subtitle">Located in the vibrant educational hub of Andhra Pradesh, India &mdash; engineered with expansive infrastructure, smart quads, and open grounds.</p>
+          </div>
+        </div>
+
+        <div class="venue__layout">
+
+          <!-- Venue Overview Card -->
+          <div class="venue-card">
+            <div class="venue-card__media">
+              <img src="assets/images/nri_university_campus.jpg" alt="NRI University academic campus complex featuring modern engineering blocks, computing facilities, and scenic grounds" loading="lazy">
+              <div class="venue-card__overlay"></div>
+              <div class="venue-card__loc-badge">
+                <i data-lucide="map-pin" class="loc-badge__icon" aria-hidden="true"></i>
+                <span class="loc-badge__text">ANDHRA PRADESH, INDIA</span>
+              </div>
+            </div>
+            
+            <div class="venue-card__body">
+              <div class="venue-card__header">
+                <h3 class="venue-card__title">NRI UNIVERSITY CAMPUS</h3>
+                <span class="venue-card__coords">GPS: 16.5062&deg; N, 80.6480&deg; E</span>
+              </div>
+              <p class="venue-card__desc">
+                NRI University provides an exceptional institutional backdrop for PARADOX ARENA. Featuring over 50 acres of world-class academic complexes, high-capacity auditoriums, specialized engineering laboratories, and open-air athletic grounds, the campus is fully equipped to handle major inter-college gatherings with premier hospitality and technical facilities.
+              </p>
+              
+              <div class="venue-amenities">
+                <div class="amenity-item">
+                  <i data-lucide="check" class="amenity-item__icon" aria-hidden="true"></i>
+                  <span>Campus-Wide Gigabit Wi-Fi Mesh</span>
+                </div>
+                <div class="amenity-item">
+                  <i data-lucide="check" class="amenity-item__icon" aria-hidden="true"></i>
+                  <span>24/7 Medical Response Unit &amp; Ambulance</span>
+                </div>
+                <div class="amenity-item">
+                  <i data-lucide="check" class="amenity-item__icon" aria-hidden="true"></i>
+                  <span>Food Court &amp; Water Hydration Stations</span>
+                </div>
+                <div class="amenity-item">
+                  <i data-lucide="check" class="amenity-item__icon" aria-hidden="true"></i>
+                  <span>Dedicated Vehicle Parking Zones</span>
+                </div>
+                <div class="amenity-item">
+                  <i data-lucide="check" class="amenity-item__icon" aria-hidden="true"></i>
+                  <span>Accessible Ramps &amp; Facilities</span>
+                </div>
+                <div class="amenity-item">
+                  <i data-lucide="check" class="amenity-item__icon" aria-hidden="true"></i>
+                  <span>Central Security &amp; Helpdesk Assistance</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transit & Directions Grid -->
+          <div class="transit-grid">
+
+            <div class="transit-card">
+              <div class="transit-card__header">
+                <span class="transit-card__mode">BY AIR</span>
+                <span class="transit-card__code">AIRPORT TRANSIT</span>
+              </div>
+              <h4 class="transit-card__title">Vijayawada International (VGA)</h4>
+              <p class="transit-card__desc">
+                Approximately 35-45 minutes via National Highway. Direct prepaid taxis, app-based cabs, and dedicated festival welcome desks operate during peak participant arrival windows.
+              </p>
+            </div>
+
+            <div class="transit-card">
+              <div class="transit-card__header">
+                <span class="transit-card__mode">BY RAILWAY</span>
+                <span class="transit-card__code">RAILWAY JUNCTIONS</span>
+              </div>
+              <h4 class="transit-card__title">Vijayawada &amp; Guntur Junctions</h4>
+              <p class="transit-card__desc">
+                Major railway hubs connecting all Indian metros. Frequent connecting buses, local transit, and scheduled NRI University festival shuttles run from station exits.
+              </p>
+            </div>
+
+            <div class="transit-card">
+              <div class="transit-card__header">
+                <span class="transit-card__mode">BY ROAD</span>
+                <span class="transit-card__code">HIGHWAY ACCESS</span>
+              </div>
+              <h4 class="transit-card__title">National Highway Arterials</h4>
+              <p class="transit-card__desc">
+                Seamless highway access with clear festival directional signage. Ample monitored on-campus parking for two-wheelers, private cars, and chartered college buses at Gate 1 and Gate 3.
+              </p>
+            </div>
+
+            <div class="transit-card transit-card--accent">
+              <div class="transit-card__header">
+                <span class="transit-card__mode">CAMPUS ENTRY</span>
+                <span class="transit-card__code">CHECK-IN DESK</span>
+              </div>
+              <h4 class="transit-card__title">Festival Accreditation Hub</h4>
+              <p class="transit-card__desc">
+                All external participants must present their digital registration pass and valid student college ID card at the Accreditation Counter situated at the Main Campus Entrance.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECTION 08: REGISTRATION (Mandatory assignment requirement)
+         Participation passes, responsive interactive form, clear frontend CTA
+         ====================================================================== -->
+    <section class="section register" id="register" aria-labelledby="register-title">
+      <div class="container">
+
+        <div class="section-head">
+          <div class="section-head__meta">
+            <span class="section-head__code">// 08 &mdash; ACCESS CREDENTIALS</span>
+            <span class="section-head__label">OFFICIAL REGISTRATION</span>
+          </div>
+          <div class="section-head__flex">
+            <h2 class="section-head__title" id="register-title">CLAIM YOUR <span class="hl-lime">ARENA</span> PASS</h2>
+            <p class="section-head__subtitle">Select your festival pass tier, submit your participation credentials, and step into the definitive collegiate techno-cultural showdown.</p>
+          </div>
+        </div>
+
+        <!-- Pass Tiers Selector -->
+        <div class="pass-tiers">
+
+          <div class="pass-card">
+            <div class="pass-card__header">
+              <span class="pass-card__type">STUDENT PASS</span>
+              <span class="pass-card__cost">FREE</span>
+            </div>
+            <h3 class="pass-card__name">GENERAL DELEGATE</h3>
+            <p class="pass-card__desc">Access to open exhibitions, tech expos, audience bleachers, food boulevard, and inaugural ceremonies.</p>
+            <ul class="pass-card__perks">
+              <li>&bull; Campus Exhibition Entry</li>
+              <li>&bull; Open Innovation Keynotes</li>
+              <li>&bull; Festival Kit &amp; Digital Badge</li>
+            </ul>
+            <a class="btn btn--ghost pass-card__btn" href="#reg-form">Select Delegate <i data-lucide="arrow-right" class="btn__arrow" aria-hidden="true"></i></a>
+          </div>
+
+          <div class="pass-card pass-card--featured">
+            <div class="pass-card__featured-badge">MOST POPULAR</div>
+            <div class="pass-card__header">
+              <span class="pass-card__type">COMPETITOR PASS</span>
+              <span class="pass-card__cost">&#8377;299</span>
+            </div>
+            <h3 class="pass-card__name">TECH INNOVATOR</h3>
+            <p class="pass-card__desc">Full competition entry for NeuroHack 48H, RoboClash, Algorithmix, or Apex Velocity Esports with cash prize eligibility.</p>
+            <ul class="pass-card__perks">
+              <li>&bull; Official Competition Entry</li>
+              <li>&bull; 48-Hour Lab Compute &amp; Wi-Fi</li>
+              <li>&bull; Certificate &amp; Cash Prize Pools</li>
+            </ul>
+            <a class="btn btn--primary pass-card__btn" href="#reg-form">Select Innovator <i data-lucide="arrow-right" class="btn__arrow" aria-hidden="true"></i></a>
+          </div>
+
+          <div class="pass-card">
+            <div class="pass-card__header">
+              <span class="pass-card__type">CULTURAL PASS</span>
+              <span class="pass-card__cost">&#8377;249</span>
+            </div>
+            <h3 class="pass-card__name">CULTURAL PERFORMER</h3>
+            <p class="pass-card__desc">Entry for Battle of the Bands, Step Paradox dance clash, theatrical arts, and photography competitions.</p>
+            <ul class="pass-card__perks">
+              <li>&bull; Stage &amp; Green Room Access</li>
+              <li>&bull; Soundcheck &amp; Tech Support</li>
+              <li>&bull; Cultural Trophy Eligibility</li>
+            </ul>
+            <a class="btn btn--ghost pass-card__btn" href="#reg-form">Select Performer <i data-lucide="arrow-right" class="btn__arrow" aria-hidden="true"></i></a>
+          </div>
+
+          <div class="pass-card pass-card--vip">
+            <div class="pass-card__header">
+              <span class="pass-card__type">ALL-ACCESS PASS</span>
+              <span class="pass-card__cost">&#8377;599</span>
+            </div>
+            <h3 class="pass-card__name">ARENA ALL-ACCESS</h3>
+            <p class="pass-card__desc">All competition participation plus front-stage priority seating for night headliner concerts and exclusive official merchandise.</p>
+            <ul class="pass-card__perks">
+              <li>&bull; Complete Festival Access</li>
+              <li>&bull; Priority Concert Pit Entry</li>
+              <li>&bull; Limited Paradox Arena T-Shirt</li>
+            </ul>
+            <a class="btn btn--ghost pass-card__btn" href="#reg-form">Select All-Access <i data-lucide="arrow-right" class="btn__arrow" aria-hidden="true"></i></a>
+          </div>
+
+        </div>
+
+        <!-- Registration Interactive Form Block -->
+        <div class="reg-form-wrapper" id="reg-form">
+          <div class="reg-form-card">
+
+            <div class="reg-form-card__header">
+              <div>
+                <span class="reg-form-card__code">CREDENTIAL INTAKE // FRONTEND PORTAL</span>
+                <h3 class="reg-form-card__title">PARTICIPANT REGISTRATION FORM</h3>
+              </div>
+              <span class="reg-form-card__status">NRI UNIVERSITY PORTAL ACTIVE</span>
+            </div>
+
+            <form class="reg-form" id="paradox-reg-form" action="#reg-form" method="GET">
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="reg-name" class="form-label">Full Name <span class="req">*</span></label>
+                  <input type="text" id="reg-name" name="name" class="form-input" placeholder="e.g. Maya Sharma" required autocomplete="name">
+                </div>
+
+                <div class="form-group">
+                  <label for="reg-email" class="form-label">Email Address <span class="req">*</span></label>
+                  <input type="email" id="reg-email" name="email" class="form-input" placeholder="e.g. maya@student.edu" required autocomplete="email">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="reg-phone" class="form-label">Contact Number <span class="req">*</span></label>
+                  <input type="tel" id="reg-phone" name="phone" class="form-input" placeholder="e.g. +91 98765 43210" required autocomplete="tel">
+                </div>
+
+                <div class="form-group">
+                  <label for="reg-college" class="form-label">College / University Name <span class="req">*</span></label>
+                  <input type="text" id="reg-college" name="college" class="form-input" placeholder="e.g. NRI University / External Institution" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="reg-pass" class="form-label">Preferred Pass Tier <span class="req">*</span></label>
+                  <select id="reg-pass" name="pass_tier" class="form-select" required>
+                    <option value="" disabled selected>Select Pass Tier</option>
+                    <option value="General Delegate (Free)">General Delegate Pass (Free)</option>
+                    <option value="Tech Innovator (₹299)">Tech Innovator Competitor Pass (₹299)</option>
+                    <option value="Cultural Performer (₹249)">Cultural Performer Pass (₹249)</option>
+                    <option value="Arena All-Access (₹599)">Arena All-Access Pass (₹599)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="reg-category" class="form-label">Primary Event of Interest <span class="req">*</span></label>
+                  <select id="reg-category" name="event_category" class="form-select" required>
+                    <option value="" disabled selected>Select Event / Arena</option>
+                    <option value="NeuroHack 48H Hackathon">NeuroHack 48H AI Hackathon</option>
+                    <option value="RoboClash Titan Arena">RoboClash: Titan Arena Combat Robotics</option>
+                    <option value="Algorithmix Speed Run">Algorithmix: Speed Run Coding Challenge</option>
+                    <option value="Apex Velocity Esports">Apex Velocity: Esports Championship</option>
+                    <option value="Resonance Battle of the Bands">Resonance: Battle of the Bands</option>
+                    <option value="Step Paradox Dance Clash">Step Paradox: Choreo Dance Clash</option>
+                    <option value="Edge AI Workshop">Edge AI & Quantum Technology Workshop</option>
+                    <option value="General Festival Attendee">General Attendee & Concert Audience</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row form-row--checks">
+                <label class="form-check">
+                  <input type="checkbox" name="accommodation" value="yes" class="form-check__input">
+                  <span class="form-check__label">Hostel accommodation required during festival dates (NRI University campus)</span>
+                </label>
+                <label class="form-check">
+                  <input type="checkbox" name="terms" required class="form-check__input">
+                  <span class="form-check__label">I agree to abide by the festival code of conduct and safety regulations <span class="req">*</span></span>
+                </label>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn--primary form-submit">
+                  Generate Registration Pass <i data-lucide="arrow-right" class="btn__arrow" aria-hidden="true"></i>
+                </button>
+                <p class="form-note">
+                  <span class="form-note__dot" aria-hidden="true"></span>
+                  Instant frontend validation &bull; Confirmation ticket preview generated on submission.
+                </p>
+              </div>
+
+            </form>
+
+            <!-- Interactive Pass Confirmation Modal / Notice -->
+            <div class="pass-modal" id="pass-modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+              <div class="pass-modal__dialog">
+                <div class="pass-modal__header">
+                  <span class="pass-modal__status"><i data-lucide="check-circle" class="icon-inline" aria-hidden="true"></i> REGISTRATION RECORDED // ACCESS GRANTED</span>
+                  <button type="button" class="pass-modal__close" id="modal-close" aria-label="Close confirmation pass">&times;</button>
+                </div>
+                <div class="pass-modal__body">
+                  <div class="pass-ticket">
+                    <div class="pass-ticket__left">
+                      <p class="pass-ticket__presents">NRI UNIVERSITY &bull; PARADOX ARENA</p>
+                      <h4 class="pass-ticket__title" id="modal-title">OFFICIAL ADMISSION BADGE</h4>
+                      <div class="pass-ticket__meta">
+                        <p><strong>NAME:</strong> <span id="ticket-name">Maya Sharma</span></p>
+                        <p><strong>INSTITUTION:</strong> <span id="ticket-college">NRI University</span></p>
+                        <p><strong>PASS TIER:</strong> <span id="ticket-pass" class="hl-lime">Tech Innovator</span></p>
+                        <p><strong>EVENT:</strong> <span id="ticket-event">NeuroHack 48H</span></p>
+                      </div>
+                    </div>
+                    <div class="pass-ticket__right">
+                      <div class="pass-ticket__barcode" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                      </div>
+                      <p class="pass-ticket__badge-id">BADGE #PDX-84920</p>
+                      <p class="pass-ticket__tag">VALID AT ALL GATES</p>
+                    </div>
+                  </div>
+                  <p class="pass-modal__advice">Please take a screenshot of your admission badge or present your registered email at the NRI University accreditation desk.</p>
+                </div>
+                <div class="pass-modal__footer">
+                  <button type="button" class="btn btn--primary" id="modal-confirm-btn">Confirm &amp; Done</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Live Badge Real-Time Sync Container -->
+          <div class="live-ticket-container">
+            <div class="live-ticket-wrapper">
+              <div class="live-ticket-header">
+                <span class="live-ticket-title">
+                  <i data-lucide="shield-check" class="badge-icon" aria-hidden="true"></i> REAL-TIME CREDENTIAL PASS
+                </span>
+                <span class="live-ticket-pulse"><span class="pulse-dot"></span> SYNC ACTIVE</span>
+              </div>
+              
+              <div id="live-ticket-preview" class="live-ticket-badge" aria-live="polite">
+                <div class="badge-shimmer" aria-hidden="true"></div>
+                <div class="badge-watermark" aria-hidden="true">PARADOX ARENA</div>
+                
+                <div class="badge-top">
+                  <div class="badge-institution">
+                    <span class="badge-uni">NRI UNIVERSITY</span>
+                    <span class="badge-edition">PARADOX ARENA ACCREDITATION</span>
+                  </div>
+                  <div class="badge-chip" aria-hidden="true">
+                    <div class="badge-chip-lines"></div>
+                  </div>
+                </div>
+
+                <div class="badge-body">
+                  <div class="badge-field">
+                    <span class="badge-label">DELEGATE / COMPETITOR</span>
+                    <h4 class="badge-name" id="preview-name">MAYA SHARMA</h4>
+                  </div>
+                  
+                  <div class="badge-meta-grid">
+                    <div class="badge-field">
+                      <span class="badge-label">INSTITUTION</span>
+                      <span class="badge-value" id="preview-college">NRI UNIVERSITY</span>
+                    </div>
+                    <div class="badge-field">
+                      <span class="badge-label">PASS TIER</span>
+                      <span class="badge-value badge-value--tier" id="preview-pass">TECH INNOVATOR</span>
+                    </div>
+                    <div class="badge-field">
+                      <span class="badge-label">ARENA / EVENT</span>
+                      <span class="badge-value" id="preview-event">NEUROHACK 48H</span>
+                    </div>
+                    <div class="badge-field">
+                      <span class="badge-label">ACCESS LEVEL</span>
+                      <span class="badge-value badge-value--status" id="preview-access">LEVEL 3 // HACK &amp; PIT LABS</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="badge-footer">
+                  <div class="badge-barcode-block">
+                    <div class="badge-barcode" aria-hidden="true">
+                      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <span class="badge-serial" id="preview-serial">PDX-84920-X7</span>
+                  </div>
+                  <div class="badge-security">
+                    <span class="badge-security-tag"><i data-lucide="check" class="icon-inline" aria-hidden="true"></i> AUTHENTICATED</span>
+                    <span class="badge-security-code">SEC-CRC32: 0x9F4E</span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="live-ticket-note">
+                <i data-lucide="info" class="icon-inline" aria-hidden="true"></i> Live cryptographic badge updates in real time as you complete the registration credentials.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ======================================================================
+       SECTION 09: FOOTER
+       Preserves NRI University identity, tagline, navigation, and copyright
+       Strict rule: No year added to the branding or copyright!
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+
+      <div class="footer__main">
+
+        <!-- Column 1: Brand -->
+        <div class="footer__col footer__col--brand">
+          <a class="footer__logo" href="#hero" aria-label="PARADOX ARENA, back to top">
+            PARADOX <span>ARENA</span>
+          </a>
+          <p class="footer__presents">Presented by <strong>NRI University</strong></p>
+          <p class="footer__tagline">EXPECT THE <span class="hl-lime">UNEXPECTED.</span></p>
+          <p class="footer__desc">
+            The premier annual techno-cultural festival of Andhra Pradesh. A convergence of artificial intelligence, kinetic engineering, live acoustics, choreography, and unrestrained student innovation.
+          </p>
+          <div class="footer__badge">
+            <span class="footer__badge-dot" aria-hidden="true"></span>
+            <span>NRI University &bull; Andhra Pradesh, India</span>
+          </div>
+        </div>
+
+        <!-- Column 2: Navigation Links -->
+        <div class="footer__col">
+          <h4 class="footer__heading">QUICK LINKS</h4>
+          <ul class="footer__links">
+            <li><a href="#about">01 / About Paradox</a></li>
+            <li><a href="#events">02 / Festival Categories</a></li>
+            <li><a href="#schedule">03 / Event Schedule</a></li>
+            <li><a href="#experience">04 / The Experience</a></li>
+            <li><a href="#featured">05 / Featured Arenas</a></li>
+            <li><a href="#performers">06 / Guest Performers</a></li>
+            <li><a href="#venue">07 / Venue &amp; Directions</a></li>
+            <li><a href="#register">08 / Registration Portal</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Event Categories -->
+        <div class="footer__col">
+          <h4 class="footer__heading">COMPETITIONS</h4>
+          <ul class="footer__links">
+            <li><a href="#events">NeuroHack 48H AI Sprint</a></li>
+            <li><a href="#events">RoboClash Kinetic Pit</a></li>
+            <li><a href="#events">Algorithmix Speed Coding</a></li>
+            <li><a href="#events">Apex Velocity Esports</a></li>
+            <li><a href="#events">Resonance Battle of the Bands</a></li>
+            <li><a href="#events">Step Paradox Choreo Clash</a></li>
+            <li><a href="#events">Edge-AI Technology Workshop</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Location & Council -->
+        <div class="footer__col">
+          <h4 class="footer__heading">CAMPUS &amp; HELPDESK</h4>
+          <div class="footer__contact">
+            <p><strong>NRI University Campus</strong><br>
+            Andhra Pradesh, India</p>
+            <p class="footer__coords">N 16&deg; 30' 22" &bull; E 80&deg; 38' 52"</p>
+            <p><strong>Festival Helpdesk:</strong><br>
+            Student Affairs &amp; Organizing Council</p>
+            <p><strong>General Inquiries:</strong><br>
+            paradoxarena@nriuniversity.edu.in</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <div class="footer__credit">
+          <span class="credit__univ">Website developed for NRI University</span>
+          <span class="credit__sep" aria-hidden="true">&bull;</span>
+          <span class="credit__author">Made by <span id="nagendra-scramble" class="scramble-author" data-text="Nagendra Varma">Nagendra Varma</span></span>
+        </div>
+        <p class="footer__copyright">
+          &copy; NRI University. PARADOX ARENA. All rights reserved.
+        </p>
+        <p class="footer__meta">
+          Designed with semantic HTML5 &amp; CSS3 &bull; Expect the Unexpected.
+        </p>
+        <a class="footer__top-btn" href="#hero" aria-label="Return to top of page">
+          Back to Top <i data-lucide="arrow-up" class="icon-inline" aria-hidden="true"></i>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
