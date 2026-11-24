@@ -3891,3 +3891,68 @@ svg.lucide,
     animation: none !important;
   }
 }
+
+
+/* ==========================================================================
+   PURE HTML/CSS INTERACTIVITY (ZERO JAVASCRIPT)
+   ========================================================================== */
+
+/* Preloader Auto Dismiss via Pure CSS Keyframe Animation */
+@keyframes preloaderDismiss {
+  0% { opacity: 1; visibility: visible; }
+  70% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; pointer-events: none; display: none; }
+}
+
+#preloader {
+  animation: preloaderDismiss 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+  pointer-events: none !important;
+}
+
+#custom-cursor {
+  display: none !important;
+}
+
+/* Pure CSS Event Category Tabs */
+.filter-radio {
+  display: none !important;
+}
+
+.filter-tab {
+  cursor: pointer;
+  user-select: none;
+}
+
+#filter-all:checked ~ #event-filters label[for="filter-all"],
+#filter-ai-code:checked ~ #event-filters label[for="filter-ai-code"],
+#filter-robotics:checked ~ #event-filters label[for="filter-robotics"],
+#filter-esports:checked ~ #event-filters label[for="filter-esports"],
+#filter-culture:checked ~ #event-filters label[for="filter-culture"],
+#filter-workshops:checked ~ #event-filters label[for="filter-workshops"] {
+  background: var(--lime) !important;
+  color: var(--black) !important;
+  border-color: var(--lime) !important;
+  box-shadow: 0 0 20px var(--lime-glow) !important;
+}
+
+#filter-all:checked ~ #event-filters label[for="filter-all"] .filter-tab__icon,
+#filter-ai-code:checked ~ #event-filters label[for="filter-ai-code"] .filter-tab__icon,
+#filter-robotics:checked ~ #event-filters label[for="filter-robotics"] .filter-tab__icon,
+#filter-esports:checked ~ #event-filters label[for="filter-esports"] .filter-tab__icon,
+#filter-culture:checked ~ #event-filters label[for="filter-culture"] .filter-tab__icon,
+#filter-workshops:checked ~ #event-filters label[for="filter-workshops"] .filter-tab__icon {
+  stroke: var(--black) !important;
+}
+
+#filter-ai-code:checked ~ .events__grid .event-card:not([data-category="ai-code"]),
+#filter-robotics:checked ~ .events__grid .event-card:not([data-category="robotics"]),
+#filter-esports:checked ~ .events__grid .event-card:not([data-category="esports"]),
+#filter-culture:checked ~ .events__grid .event-card:not([data-category="culture"]),
+#filter-workshops:checked ~ .events__grid .event-card:not([data-category="workshops"]) {
+  display: none !important;
+}
+
+/* Ensure smooth native scrolling */
+html {
+  scroll-behavior: smooth !important;
+}

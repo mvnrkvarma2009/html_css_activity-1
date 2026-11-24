@@ -21,22 +21,21 @@
        UPGRADE CDNs & SCRIPTS
        GSAP 3.12.5 & ScrollTrigger, Lenis 1.1 Smooth Scroll, Lucide Icons, Three.js
        ====================================================================== -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="js/scramble.js" defer></script>
-  <script src="js/digital-rain.js" defer></script>
-  <script src="js/flower-border.js" defer></script>
-  <script src="js/main.js" defer></script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </head>
 
 <body>
 
   <!-- Desktop-only reticle velocity cursor -->
-  <div id="custom-cursor" class="custom-cursor" aria-hidden="true">
-    <div class="custom-cursor__dot"></div>
+  
     <div class="custom-cursor__ring"></div>
   </div>
 
@@ -88,8 +87,8 @@
 
       <!-- Ambient Audio Toggle Button -->
       <button id="sound-toggle" class="sound-toggle" type="button" aria-label="Toggle ambient cyber audio" aria-pressed="false">
-        <i data-lucide="volume-x" class="sound-toggle__icon sound-toggle__icon--off" aria-hidden="true"></i>
-        <i data-lucide="volume-2" class="sound-toggle__icon sound-toggle__icon--on" aria-hidden="true"></i>
+        <svg class="sound-toggle__icon sound-toggle__icon--off" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+        <svg class="sound-toggle__icon sound-toggle__icon--on" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
         <span class="sound-toggle__label">AUDIO: OFF</span>
       </button>
 
@@ -166,7 +165,7 @@
         <div id="festival-countdown" class="festival-countdown" aria-label="Festival Countdown Timer">
           <div class="countdown-hud__header">
             <span class="countdown-hud__badge">
-              <i data-lucide="clock" class="hud-icon" aria-hidden="true"></i> T-MINUS TO CONVERGENCE
+              <svg class="hud-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> T-MINUS TO CONVERGENCE
             </span>
             <span class="countdown-hud__status">LIVE TELEMETRY // 30 DAYS OUT</span>
           </div>
@@ -197,8 +196,8 @@
           <div class="hero__lead">
             <p class="hero__tagline">Expect the <span class="hl">unexpected.</span></p>
             <div class="hero__actions">
-              <a class="btn btn--primary" href="#events">Explore the Arena <i data-lucide="arrow-right" class="btn__arrow" aria-hidden="true"></i></a>
-              <a class="btn btn--ghost" href="#register">Enter Paradox <i data-lucide="arrow-right" class="btn__arrow" aria-hidden="true"></i></a>
+              <a class="btn btn--primary" href="#events">Explore the Arena <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+              <a class="btn btn--ghost" href="#register">Enter Paradox <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
             </div>
           </div>
 
@@ -337,31 +336,39 @@
         </div>
 
         <!-- Category filter tabs in Events section -->
+        <!-- Pure CSS Category filter tabs in Events section -->
+        <input type="radio" name="event-cat" id="filter-all" class="filter-radio" checked>
+        <input type="radio" name="event-cat" id="filter-ai-code" class="filter-radio">
+        <input type="radio" name="event-cat" id="filter-robotics" class="filter-radio">
+        <input type="radio" name="event-cat" id="filter-esports" class="filter-radio">
+        <input type="radio" name="event-cat" id="filter-culture" class="filter-radio">
+        <input type="radio" name="event-cat" id="filter-workshops" class="filter-radio">
+
         <div id="event-filters" class="event-filters" role="tablist" aria-label="Event category filters">
-          <button type="button" class="filter-tab filter-tab--active" role="tab" aria-selected="true" data-filter="all">
-            <i data-lucide="layers" class="filter-tab__icon" aria-hidden="true"></i>
+          <label for="filter-all" class="filter-tab">
+            <svg class="filter-tab__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
             <span>All Battlegrounds</span>
-          </button>
-          <button type="button" class="filter-tab" role="tab" aria-selected="false" data-filter="ai-code">
-            <i data-lucide="terminal" class="filter-tab__icon" aria-hidden="true"></i>
+          </label>
+          <label for="filter-ai-code" class="filter-tab">
+            <svg class="filter-tab__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
             <span>AI &amp; Code</span>
-          </button>
-          <button type="button" class="filter-tab" role="tab" aria-selected="false" data-filter="robotics">
-            <i data-lucide="cpu" class="filter-tab__icon" aria-hidden="true"></i>
+          </label>
+          <label for="filter-robotics" class="filter-tab">
+            <svg class="filter-tab__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"></path></svg>
             <span>Robotics</span>
-          </button>
-          <button type="button" class="filter-tab" role="tab" aria-selected="false" data-filter="esports">
-            <i data-lucide="gamepad-2" class="filter-tab__icon" aria-hidden="true"></i>
+          </label>
+          <label for="filter-esports" class="filter-tab">
+            <svg class="filter-tab__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line><line x1="15" y1="13" x2="15.01" y2="13"></line><line x1="18" y1="11" x2="18.01" y2="11"></line><rect x="2" y="6" width="20" height="12" rx="2"></rect></svg>
             <span>Esports</span>
-          </button>
-          <button type="button" class="filter-tab" role="tab" aria-selected="false" data-filter="culture">
-            <i data-lucide="music" class="filter-tab__icon" aria-hidden="true"></i>
+          </label>
+          <label for="filter-culture" class="filter-tab">
+            <svg class="filter-tab__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
             <span>Music &amp; Culture</span>
-          </button>
-          <button type="button" class="filter-tab" role="tab" aria-selected="false" data-filter="workshops">
-            <i data-lucide="sparkles" class="filter-tab__icon" aria-hidden="true"></i>
+          </label>
+          <label for="filter-workshops" class="filter-tab">
+            <svg class="filter-tab__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
             <span>Workshops</span>
-          </button>
+          </label>
         </div>
 
         <div class="events__grid">
@@ -383,7 +390,7 @@
               </p>
               <div class="event-card__footer">
                 <span class="event-card__format">Team of 2-4 &bull; 48 Hours</span>
-                <a class="btn-text" href="#register">Register Team <i data-lucide="arrow-right" class="icon-inline" aria-hidden="true"></i></a>
+                <a class="btn-text" href="#register">Register Team <svg class="icon-inline" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
               </div>
             </div>
           </article>
@@ -405,7 +412,7 @@
               </p>
               <div class="event-card__footer">
                 <span class="event-card__format">15kg &amp; 30kg Weight Classes</span>
-                <a class="btn-text" href="#register">Register Bot <i data-lucide="arrow-right" class="icon-inline" aria-hidden="true"></i></a>
+                <a class="btn-text" href="#register">Register Bot <svg class="icon-inline" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
               </div>
             </div>
           </article>
@@ -427,7 +434,7 @@
               </p>
               <div class="event-card__footer">
                 <span class="event-card__format">Solo Competitor &bull; 3 Rounds</span>
-                <a class="btn-text" href="#register">Enter Sprint <i data-lucide="arrow-right" class="icon-inline" aria-hidden="true"></i></a>
+                <a class="btn-text" href="#register">Enter Sprint <svg class="icon-inline" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
               </div>
             </div>
           </article>
@@ -449,7 +456,7 @@
               </p>
               <div class="event-card__footer">
                 <span class="event-card__format">Squads &amp; Solo &bull; LAN Final</span>
-                <a class="btn-text" href="#register">Join Tournament <i data-lucide="arrow-right" class="icon-inline" aria-hidden="true"></i></a>
+                <a class="btn-text" href="#register">Join Tournament <svg class="icon-inline" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
               </div>
             </div>
           </article>
@@ -471,7 +478,7 @@
               </p>
               <div class="event-card__footer">
                 <span class="event-card__format">Band (3-8 Members)</span>
-                <a class="btn-text" href="#register">Enlist Band <i data-lucide="arrow-right" class="icon-inline" aria-hidden="true"></i></a>
+                <a class="btn-text" href="#register">Enlist Band <svg class="icon-inline" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
               </div>
             </div>
           </article>
@@ -493,7 +500,7 @@
               </p>
               <div class="event-card__footer">
                 <span class="event-card__format">Solo &bull; Duo &bull; Mega-Crew</span>
-                <a class="btn-text" href="#register">Enter Stage <i data-lucide="arrow-right" class="icon-inline" aria-hidden="true"></i></a>
+                <a class="btn-text" href="#register">Enter Stage <svg class="icon-inline" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
               </div>
             </div>
           </article>
@@ -515,7 +522,7 @@
               </p>
               <div class="event-card__footer">
                 <span class="event-card__format">Hands-on Intensive &bull; 3 Sessions</span>
-                <a class="btn-text" href="#register">Enlist Workshop <i data-lucide="arrow-right" class="icon-inline" aria-hidden="true"></i></a>
+                <a class="btn-text" href="#register">Enlist Workshop <svg class="icon-inline" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
               </div>
             </div>
           </article>
@@ -1071,7 +1078,7 @@
               <img src="assets/images/nri_university_campus.jpg" alt="NRI University academic campus complex featuring modern engineering blocks, computing facilities, and scenic grounds" loading="lazy">
               <div class="venue-card__overlay"></div>
               <div class="venue-card__loc-badge">
-                <i data-lucide="map-pin" class="loc-badge__icon" aria-hidden="true"></i>
+                <svg class="loc-badge__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                 <span class="loc-badge__text">ANDHRA PRADESH, INDIA</span>
               </div>
             </div>
@@ -1087,27 +1094,27 @@
               
               <div class="venue-amenities">
                 <div class="amenity-item">
-                  <i data-lucide="check" class="amenity-item__icon" aria-hidden="true"></i>
+                  <svg class="amenity-item__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   <span>Campus-Wide Gigabit Wi-Fi Mesh</span>
                 </div>
                 <div class="amenity-item">
-                  <i data-lucide="check" class="amenity-item__icon" aria-hidden="true"></i>
+                  <svg class="amenity-item__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   <span>24/7 Medical Response Unit &amp; Ambulance</span>
                 </div>
                 <div class="amenity-item">
-                  <i data-lucide="check" class="amenity-item__icon" aria-hidden="true"></i>
+                  <svg class="amenity-item__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   <span>Food Court &amp; Water Hydration Stations</span>
                 </div>
                 <div class="amenity-item">
-                  <i data-lucide="check" class="amenity-item__icon" aria-hidden="true"></i>
+                  <svg class="amenity-item__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   <span>Dedicated Vehicle Parking Zones</span>
                 </div>
                 <div class="amenity-item">
-                  <i data-lucide="check" class="amenity-item__icon" aria-hidden="true"></i>
+                  <svg class="amenity-item__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   <span>Accessible Ramps &amp; Facilities</span>
                 </div>
                 <div class="amenity-item">
-                  <i data-lucide="check" class="amenity-item__icon" aria-hidden="true"></i>
+                  <svg class="amenity-item__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   <span>Central Security &amp; Helpdesk Assistance</span>
                 </div>
               </div>
@@ -1202,7 +1209,7 @@
               <li>&bull; Open Innovation Keynotes</li>
               <li>&bull; Festival Kit &amp; Digital Badge</li>
             </ul>
-            <a class="btn btn--ghost pass-card__btn" href="#reg-form">Select Delegate <i data-lucide="arrow-right" class="btn__arrow" aria-hidden="true"></i></a>
+            <a class="btn btn--ghost pass-card__btn" href="#reg-form">Select Delegate <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
           </div>
 
           <div class="pass-card pass-card--featured">
@@ -1218,7 +1225,7 @@
               <li>&bull; 48-Hour Lab Compute &amp; Wi-Fi</li>
               <li>&bull; Certificate &amp; Cash Prize Pools</li>
             </ul>
-            <a class="btn btn--primary pass-card__btn" href="#reg-form">Select Innovator <i data-lucide="arrow-right" class="btn__arrow" aria-hidden="true"></i></a>
+            <a class="btn btn--primary pass-card__btn" href="#reg-form">Select Innovator <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
           </div>
 
           <div class="pass-card">
@@ -1233,7 +1240,7 @@
               <li>&bull; Soundcheck &amp; Tech Support</li>
               <li>&bull; Cultural Trophy Eligibility</li>
             </ul>
-            <a class="btn btn--ghost pass-card__btn" href="#reg-form">Select Performer <i data-lucide="arrow-right" class="btn__arrow" aria-hidden="true"></i></a>
+            <a class="btn btn--ghost pass-card__btn" href="#reg-form">Select Performer <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
           </div>
 
           <div class="pass-card pass-card--vip">
@@ -1248,7 +1255,7 @@
               <li>&bull; Priority Concert Pit Entry</li>
               <li>&bull; Limited Paradox Arena T-Shirt</li>
             </ul>
-            <a class="btn btn--ghost pass-card__btn" href="#reg-form">Select All-Access <i data-lucide="arrow-right" class="btn__arrow" aria-hidden="true"></i></a>
+            <a class="btn btn--ghost pass-card__btn" href="#reg-form">Select All-Access <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
           </div>
 
         </div>
@@ -1332,7 +1339,7 @@
 
               <div class="form-actions">
                 <button type="submit" class="btn btn--primary form-submit">
-                  Generate Registration Pass <i data-lucide="arrow-right" class="btn__arrow" aria-hidden="true"></i>
+                  Generate Registration Pass <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </button>
                 <p class="form-note">
                   <span class="form-note__dot" aria-hidden="true"></span>
@@ -1346,7 +1353,7 @@
             <div class="pass-modal" id="pass-modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
               <div class="pass-modal__dialog">
                 <div class="pass-modal__header">
-                  <span class="pass-modal__status"><i data-lucide="check-circle" class="icon-inline" aria-hidden="true"></i> REGISTRATION RECORDED // ACCESS GRANTED</span>
+                  <span class="pass-modal__status"><svg class="icon-inline" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> REGISTRATION RECORDED // ACCESS GRANTED</span>
                   <button type="button" class="pass-modal__close" id="modal-close" aria-label="Close confirmation pass">&times;</button>
                 </div>
                 <div class="pass-modal__body">
@@ -1384,7 +1391,7 @@
             <div class="live-ticket-wrapper">
               <div class="live-ticket-header">
                 <span class="live-ticket-title">
-                  <i data-lucide="shield-check" class="badge-icon" aria-hidden="true"></i> REAL-TIME CREDENTIAL PASS
+                  <svg class="badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg> REAL-TIME CREDENTIAL PASS
                 </span>
                 <span class="live-ticket-pulse"><span class="pulse-dot"></span> SYNC ACTIVE</span>
               </div>
@@ -1437,14 +1444,14 @@
                     <span class="badge-serial" id="preview-serial">PDX-84920-X7</span>
                   </div>
                   <div class="badge-security">
-                    <span class="badge-security-tag"><i data-lucide="check" class="icon-inline" aria-hidden="true"></i> AUTHENTICATED</span>
+                    <span class="badge-security-tag"><svg class="icon-inline" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg> AUTHENTICATED</span>
                     <span class="badge-security-code">SEC-CRC32: 0x9F4E</span>
                   </div>
                 </div>
               </div>
 
               <p class="live-ticket-note">
-                <i data-lucide="info" class="icon-inline" aria-hidden="true"></i> Live cryptographic badge updates in real time as you complete the registration credentials.
+                <svg class="icon-inline" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Live cryptographic badge updates in real time as you complete the registration credentials.
               </p>
             </div>
           </div>
@@ -1540,7 +1547,7 @@
           Designed with semantic HTML5 &amp; CSS3 &bull; Expect the Unexpected.
         </p>
         <a class="footer__top-btn" href="#hero" aria-label="Return to top of page">
-          Back to Top <i data-lucide="arrow-up" class="icon-inline" aria-hidden="true"></i>
+          Back to Top <svg class="icon-inline" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
         </a>
       </div>
 
